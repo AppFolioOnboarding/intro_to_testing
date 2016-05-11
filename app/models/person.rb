@@ -3,7 +3,8 @@ class Person < ActiveRecord::Base
 
   validates :name, presence: true
   validate :name_is_valid
-
+  validates :age, numericality: true
+  validate :gender_is_valid
 
   private
 
@@ -20,5 +21,9 @@ class Person < ActiveRecord::Base
 
   def name_only_contains_letters_and_is_long_enough
     errors.add(:name, 'must be made of letters only and be at least 2 characters long') unless name.match(/^[a-zA-Z]{2,}$/)
+  end
+
+  def gender_is_valid
+    errors.add(:gender, "must be 'F' or 'M'") unless gender.nil? || %w(F M).include?(gender)
   end
 end
