@@ -1,6 +1,4 @@
-class Person < ActiveRecord::Base
-  attr_accessor :name, :age, :gender
-
+class Employee < ActiveRecord::Base
   validates :name, presence: true
   validate :name_is_valid
   validates :age, numericality: true
