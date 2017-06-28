@@ -5,14 +5,14 @@ class EmployeeTest < ActiveSupport::TestCase
     skip
     employee = Employee.new(name: 'Rahul', age: 25)
 
-    refute employee.valid?
+    refute_predicate employee, :valid?
   end
 
   def test_name__must_be_present
     skip
     employee = Employee.new
 
-    assert employee.valid?
+    assert_predicate employee, :valid?
     assert_equal "must be blank", employee.errors.messages[:name].first
   end
 
@@ -20,7 +20,7 @@ class EmployeeTest < ActiveSupport::TestCase
     skip
     employee = Employee.new(name: 'Rahul')
 
-    refute employee.valid?
+    refute_predicate employee, :valid?
     assert_equal 'must start with a capital letter', employee.errors.messages[:name].first
   end
 
@@ -28,7 +28,7 @@ class EmployeeTest < ActiveSupport::TestCase
     skip
     employee = Employee.new(name: 'Rahul789')
 
-    refute employee.valid?
+    refute_predicate employee, :valid?
     # TODO: add something here to check that the error is the one we expect
   end
 

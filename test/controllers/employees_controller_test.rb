@@ -8,7 +8,7 @@ class EmployeesControllerTest < ActionController::TestCase
   test "should get index" do
     skip
     get :index
-    assert_response :success
+    assert_response :ok
     assert_select('h2', 'Listing Employees')
   end
 
