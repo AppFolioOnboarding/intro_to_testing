@@ -2,17 +2,17 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @employee.name %>
+  <div id="name"><%= @employee.name %></div>
 </p>
 
 <p>
   <strong>Gender:</strong>
-  <%= @employee.gender %>
+  <div id="gender"><%= @employee.gender %></div>
 </p>
 
 <p>
   <strong>Age:</strong>
-  <%= @employee.age %>
+  <div id="age"><%= @employee.age %></div>
 </p>
 
 <%= link_to 'Edit', edit_employee_path(@employee) %> |

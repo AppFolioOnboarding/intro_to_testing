@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class EmployeeTest < ActiveSupport::TestCase
-  def test_name__valid
+  def test_employee__valid_if_name_and_age_present_and_valid
     skip
     employee = Employee.new(name: 'Rahul', age: 25)
 
