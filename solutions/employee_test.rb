@@ -21,11 +21,13 @@ class EmployeeTest < ActiveSupport::TestCase
     assert_equal 'must start with a capital letter', employee.errors.messages[:name].first
   end
 
+  NAME_ERROR_MESSAGE = 'must be made of letters only and be at least 2 characters long'.freeze
+
   def test_name__must_contain_only_letters
     employee = Employee.new(name: 'Rahul789')
 
     refute_predicate employee, :valid?
-    assert_equal 'must be made of letters only and be at least 2 characters long', employee.errors.messages[:name].first
+    assert_equal NAME_ERROR_MESSAGE, employee.errors.messages[:name].first
   end
 
   def test_name__must_have_at_least_two_characters

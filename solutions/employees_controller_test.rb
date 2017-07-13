@@ -19,19 +19,21 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create employee' do
     assert_difference('Employee.count', 1) do
-      post employees_path, employee: { age: @employee.age, gender: @employee.gender, name: @employee.name }
+      employee_params = { age: @employee.age, gender: @employee.gender, name: @employee.name }
+      post employees_path, params: { employee: employee_params }
     end
 
-    assert_redirected_to employee_path(assigns(:employee))
+    assert_redirected_to employee_path(Employee.last)
   end
 
   test 'should fail to create with invalid data' do
     assert_no_difference('Employee.count') do
-      post employees_path, employee: { age: 'fifty', gender: @employee.gender, name: @employee.name }
+      employee_params = { age: 'fifty', gender: @employee.gender, name: @employee.name }
+      post employees_path, params: { employee: employee_params }
     end
 
     assert_response :ok
-    assert_select('#error_explanation ul li', "Age is not a number")
+    assert_select('#error_explanation ul li', 'Age is not a number')
     assert_select 'ul' do
       assert_select 'li', 1
     end
@@ -52,7 +54,8 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update employee' do
-    patch employee_path(@employee), employee: { age: @employee.age + 1, gender: @employee.gender, name: @employee.name }
+    employee_params = { age: @employee.age + 1, gender: @employee.gender, name: @employee.name }
+    patch employee_path(@employee), params: { employee: employee_params }
     assert_redirected_to employee_path(@employee)
   end
 
