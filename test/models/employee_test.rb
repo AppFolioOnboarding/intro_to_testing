@@ -13,7 +13,7 @@ class EmployeeTest < ActiveSupport::TestCase
     employee = Employee.new
 
     assert_predicate employee, :valid?
-    assert_equal "must be blank", employee.errors.messages[:name].first
+    assert_equal 'must be blank', employee.errors.messages[:name].first
   end
 
   def test_name__starts_with_capital

@@ -17,8 +17,10 @@ class Employee < ActiveRecord::Base
     errors.add(:name, 'must start with a capital letter') unless name.capitalize == name
   end
 
+  NAME_ERROR_MESSAGE = 'must be made of letters only and be at least 2 characters long'.freeze
+
   def name_only_contains_letters_and_is_long_enough
-    errors.add(:name, 'must be made of letters only and be at least 2 characters long') unless name.match(/^[a-zA-Z]{2,}$/)
+    errors.add(:name, NAME_ERROR_MESSAGE) unless name =~ /^[a-zA-Z]{2,}$/
   end
 
   def gender_is_valid

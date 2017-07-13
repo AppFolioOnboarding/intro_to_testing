@@ -35,7 +35,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :bad_request
-    assert_select('#error_explanation ul li', "Age is not a number")
+    assert_select('#error_explanation ul li', 'Age is not a number')
     assert_select 'ul' do
       assert_select 'li', 1
     end
@@ -55,8 +55,10 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update employee' do
     skip
-    patch employee_path(@employee), employee: { age: @employee.age, gender: @employee.gender, name: 'bad name16' }
-    assert_redirected_to eemployee_path(@employee)
+
+    employee_params = { age: @employee.age, gender: @employee.gender, name: 'bad name16' }
+    patch employee_path(@employee), params: { employee: employee_params }
+    assert_redirected_to employee_path(@employee)
   end
 
   test 'should destroy employee' do
