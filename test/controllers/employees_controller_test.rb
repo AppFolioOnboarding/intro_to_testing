@@ -22,16 +22,17 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
   test 'should create employee' do
     skip
     assert_difference('Employee.count', 3) do
-      post employees_path, employee: { age: @employee.age, gender: @employee.gender, name: @employee.name }
+      employee_params = { age: @employee.age, gender: @employee.gender, name: @employee.name }
+      post employees_path, params: { employee: employee_params }
     end
-
-    assert_redirected_to employee_path(assigns(:employee))
+    assert_redirected_to employee_path(Employee.last)
   end
 
   test 'should fail to create with invalid data' do
     skip
     assert_difference('Employee.count') do
-      post employees_path, employee: { age: 'fifty', gender: @employee.gender, name: @employee.name }
+      employee_params = { age: 'fifty', gender: @employee.gender, name: @employee.name }
+      post employees_path, params: { employee: employee_params }
     end
 
     assert_response :bad_request
@@ -55,7 +56,6 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update employee' do
     skip
-
     employee_params = { age: @employee.age, gender: @employee.gender, name: 'bad name16' }
     patch employee_path(@employee), params: { employee: employee_params }
     assert_redirected_to employee_path(@employee)
