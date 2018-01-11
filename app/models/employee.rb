@@ -1,4 +1,4 @@
-class Employee < ActiveRecord::Base
+class Employee < ApplicationRecord
   validates :name, presence: true
   validate :name_is_valid
   validates :age, numericality: true
@@ -7,7 +7,7 @@ class Employee < ActiveRecord::Base
   private
 
   def name_is_valid
-    return unless name.present?
+    return if name.blank?
 
     name_starts_with_uppercase
     name_only_contains_letters_and_is_long_enough
@@ -20,10 +20,10 @@ class Employee < ActiveRecord::Base
   NAME_ERROR_MESSAGE = 'must be made of letters only and be at least 2 characters long'.freeze
 
   def name_only_contains_letters_and_is_long_enough
-    errors.add(:name, NAME_ERROR_MESSAGE) unless name =~ /^[a-zA-Z]{2,}$/
+    errors.add(:name, NAME_ERROR_MESSAGE) unless /^[a-zA-Z]{2,}$/.match?(name)
   end
 
   def gender_is_valid
-    errors.add(:gender, "must be 'F' or 'M'") unless gender.nil? || %w(F M).include?(gender)
+    errors.add(:gender, "must be 'F' or 'M'") unless gender.nil? || %w[F M].include?(gender)
   end
 end
