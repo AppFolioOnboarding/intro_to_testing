@@ -1,20 +1,20 @@
 require 'test_helper'
 
 class EmployeeTest < ActiveSupport::TestCase
-  def test_employee__valid_if_name_and_age_present_and_valid
+  def test_employee__valid__if_name_and_age_present_and_valid
     employee = Employee.new(name: 'Rahul', age: 25)
 
     assert_predicate employee, :valid?
   end
 
-  def test_name__must_be_present
+  def test_name__invalid__if_name_is_blank
     employee = Employee.new
 
     refute_predicate employee, :valid?
     assert_equal "can't be blank", employee.errors.messages[:name].first
   end
 
-  def test_name__not_valid_if_name_does_not_start_with_capital
+  def test_name__invalid__if_not_starts_with_capital
     employee = Employee.new(name: 'rahul')
 
     refute_predicate employee, :valid?
@@ -23,21 +23,21 @@ class EmployeeTest < ActiveSupport::TestCase
 
   NAME_ERROR_MESSAGE = 'must be made of letters only and be at least 2 characters long'.freeze
 
-  def test_name__must_contain_only_letters
+  def test_name__invalid__if_contains_characters_other_than_letters
     employee = Employee.new(name: 'Rahul789')
 
     refute_predicate employee, :valid?
     assert_equal NAME_ERROR_MESSAGE, employee.errors.messages[:name].first
   end
 
-  def test_name__must_have_at_least_two_characters
+  def test_name__invalid__if_name_has_less_than_two_characters
     employee = Employee.new(name: 'R')
 
     refute_predicate employee, :valid?
     assert_equal 'is not a number', employee.errors.messages[:age].first
   end
 
-  def test_age_is_numeric
+  def test_age__invalid__if_age_is_not_numeric
     employee = Employee.new(name: 'Rahul', age: 'fifty')
 
     refute_predicate employee, :valid?
