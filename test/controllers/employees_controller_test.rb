@@ -37,6 +37,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to employee_path(Employee.last)
+    assert_equal 'Employee was successfully created.', flash[:notice]
   end
 
   def test_create__fail
@@ -47,7 +48,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :ok
     assert_select '#error_explanation ul li', 1
-    assert_select('#error_explanation ul li', 'Age is not a number')
+    assert_select '#error_explanation ul li', 'Age is not a number'
   end
 
   def test_update__succeed
