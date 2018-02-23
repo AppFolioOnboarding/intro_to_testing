@@ -1,5 +1,6 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i[show edit update destroy]
+
+  before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   def index
     @employees = Employee.all
@@ -16,35 +17,25 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(employee_params)
 
-    respond_to do |format|
-      if @employee.save
-        format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
-        format.json { render :show, status: :created, location: @employee }
-      else
-        format.html { render :new }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
+    if @employee.save
+      redirect_to @employee, notice: 'Employee was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @employee.update(employee_params)
-        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
-        format.json { render :show, status: :ok, location: @employee }
-      else
-        format.html { render :edit }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
+    if @employee.update(employee_params)
+      redirect_to @employee, notice: 'Employee was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @employee.destroy
-    respond_to do |format|
-      format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+
+    redirect_to employees_url, notice: 'Employee was successfully destroyed.'
   end
 
   private
@@ -54,6 +45,6 @@ class EmployeesController < ApplicationController
   end
 
   def employee_params
-    params.require(:employee).permit(:name, :gender, :age)
+    params.require(:employee).permit(:name, :age)
   end
 end
