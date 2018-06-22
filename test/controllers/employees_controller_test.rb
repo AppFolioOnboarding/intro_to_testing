@@ -9,7 +9,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
     get employees_path
 
     assert_response :ok
-    assert_select '#header', 'Listing Employees'
+    assert_select '#header', 'Employees'
   end
 
   def test_show
@@ -47,8 +47,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :ok
-    assert_select '#error_explanation ul li', 1
-    assert_select '#error_explanation ul li', 'Age is not a number'
+    assert_select '#age-error', 'Age is not a number'
   end
 
   def test_update__succeed
