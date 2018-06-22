@@ -1,6 +1,5 @@
 class EmployeesController < ApplicationController
-
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee, only: %i[show edit update destroy]
 
   def index
     @employees = Employee.all
@@ -18,7 +17,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
 
     if @employee.save
-      redirect_to @employee, notice: 'Employee was successfully created.'
+      redirect_to employee_path(@employee), notice: 'Employee was successfully created.'
     else
       render :new
     end
@@ -26,7 +25,7 @@ class EmployeesController < ApplicationController
 
   def update
     if @employee.update(employee_params)
-      redirect_to @employee, notice: 'Employee was successfully updated.'
+      redirect_to employee_path(@employee), notice: 'Employee was successfully updated.'
     else
       render :edit
     end

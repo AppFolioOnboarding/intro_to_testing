@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class EmployeeTest < ActiveSupport::TestCase
-
   def test_employee__valid
     employee = Employee.new(name: 'God', age: 10)
 

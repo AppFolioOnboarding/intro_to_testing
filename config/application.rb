@@ -1,6 +1,20 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path('boot', __dir__)
 
-require 'rails/all'
+require 'rails'
+
+# Include each railties manually, excluding `active_storage/engine`
+[
+  'active_record/railtie',
+  'action_controller/railtie',
+  'action_view/railtie',
+  'action_mailer/railtie',
+  'active_job/railtie',
+  'action_cable/engine',
+  'rails/test_unit/railtie',
+  'sprockets/railtie'
+].each do |railtie|
+  require railtie
+end
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -19,5 +33,6 @@ module IntroToTestingApp
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.active_record.sqlite3.represent_boolean_as_integer = true
   end
 end

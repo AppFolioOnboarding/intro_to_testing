@@ -1,16 +1,33 @@
 <% if flash[:notice].present? %>
-  <p id="notice"><%= flash[:notice] %></p>
+  <div class="container">
+    <div class="notification is-primary" id="notice">
+      <%= flash[:notice] %>
+    </div>
+  </div>
 <% end %>
 
-<p>
-  <strong>Name:</strong>
-  <div id="name"><%= @employee.name %></div>
-</p>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title" id="header">
+        Employee
+      </h1>
+    </div>
+  </div>
+</section>
 
-<p>
-  <strong>Age:</strong>
-  <div id="age"><%= @employee.age %></div>
-</p>
+<section class="section is-small">
+  <div class="box">
+    <p class="subtitle is-4"><strong>Name: </strong><span id="name"><%= @employee.name %></span></p>
+    <p class="subtitle is-4"><strong>Age: </strong><span id="age"><%= @employee.age %></span></p>
+  </div>
 
-<%= link_to 'Edit', edit_employee_path(@employee) %> |
-<%= link_to 'Back', employees_path %>
+  <div class="field is-grouped">
+    <p class="control">
+      <%= link_to 'Edit', edit_employee_path(@employee), class: 'button is-primary' %>
+    </p>
+    <p class="control">
+      <%= link_to 'Back', employees_path, class: 'button is-link' %>
+    </p>
+  </div>
+</section>

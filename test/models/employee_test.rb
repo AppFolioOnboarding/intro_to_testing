@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class EmployeeTest < ActiveSupport::TestCase
-
   def test_employee__valid
     employee = Employee.new(name: 'God', age: 10)
 
@@ -11,7 +10,7 @@ class EmployeeTest < ActiveSupport::TestCase
   def test_name__invalid_if_name_is_blank
     employee = Employee.new(name: '', age: 10)
 
-    refute_predicate employee, :valid?
+    assert_not_predicate employee, :valid?
     assert_equal "can't be blank", employee.errors.messages[:name].first
   end
 
