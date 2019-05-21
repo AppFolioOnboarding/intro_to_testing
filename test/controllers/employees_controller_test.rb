@@ -46,7 +46,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
       post employees_path, params: { employee: employee_params }
     end
 
-    assert_response :ok
+    assert_response :unprocessable_entity
     assert_select '#age-error', 'Age is not a number'
   end
 

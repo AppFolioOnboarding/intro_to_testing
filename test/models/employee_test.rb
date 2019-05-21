@@ -10,7 +10,7 @@ class EmployeeTest < ActiveSupport::TestCase
   def test_name__invalid_if_name_is_blank
     employee = Employee.new(name: '', age: 10)
 
-    assert_not_predicate employee, :valid?
+    refute_predicate employee, :valid?
     assert_equal "can't be blank", employee.errors.messages[:name].first
   end
 
