@@ -5,7 +5,7 @@
       <%= f.text_field :name, class: 'input' %>
 
       <% if employee.errors[:name].present? %>
-        <p class="help is-danger"><%= employee.errors.full_messages_for(:name).join('') %></p>
+        <p class="help is-danger" id="name-error"><%= employee.errors.full_messages_for(:name).join('') %></p>
       <% end %>
     </div>
 
